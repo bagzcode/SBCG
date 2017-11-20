@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{E81EE28A-FDA8-2833-6E08-1900980D51A5}") = "Social Media Combined Game", "Assembly-CSharp.csproj", "{09B53FE4-6872-09A2-5944-09143630E380}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09B53FE4-6872-09A2-5944-09143630E380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B53FE4-6872-09A2-5944-09143630E380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B53FE4-6872-09A2-5944-09143630E380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B53FE4-6872-09A2-5944-09143630E380}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
