@@ -221,9 +221,10 @@ public class dbAccess : MonoBehaviour {
 		Debug.Log(query);
 		try
 		{
-			//dbcmd = dbcon.CreateCommand();
-			//dbcmd.CommandText = query;
-			//reader = dbcmd.ExecuteReader();
+
+			dbcmd = dbcon.CreateCommand();
+			dbcmd.CommandText = query;
+			reader = dbcmd.ExecuteReader();
 		}
 		catch(Exception e){
 			

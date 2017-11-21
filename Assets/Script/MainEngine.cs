@@ -12,24 +12,28 @@ public class MainEngine : MonoBehaviour {
 	private string[] registerdices = {"diceone","dicetwo","dicethree","dicefour","dicefive","dicesix"};
 	private int diceNumber;
 	private int number = 0;
-	string active_number = "1";
+	string active_number = "1", player_active_number = "1", tempcurrentactive;
 	int nextactive = 1;
-	private IDataReader playernumber; 
-	public ArrayList playernum;
-	private string activesessionid;
+	private IDataReader playernumber, totplayeractive; 
+	public ArrayList playernum; 
+	public int totnumplayeractive, diceNumberResult;
+	private string activesessionid, hismsg;
 	public int[] avataractive;
+	public int[] playercurrentposition = {0,0,0,0};
 
-	//dbAccess db;
+	public string PlayerNameActive;
+
 	dbAccess db;
-	//StartGame defvalueavatar;
 
 	// Use this for initialization to connect database
 	void Start () {
 
+		//Load required scenes for the games 
 		SceneManager.UnloadScene("New");
 		SceneManager.UnloadScene("Info");
 		SceneManager.UnloadScene("Problem");
 
+		//get values of active session and number of active players
 		activesessionid = GameObject.Find("EventSystem").GetComponent<StartGame>().active_session_id;
 		avataractive = GameObject.Find("EventSystem").GetComponent<StartGame>().avataractive;
 
@@ -40,9 +44,23 @@ public class MainEngine : MonoBehaviour {
 		ArrayList result = db.SelectLastRecord ("id", "tbl_Sessions");
 	
 		session_id = ((string[])result[0])[0];
+		
+		//Set active_session_id on EventSystem to be used laterduring the game
 		GameObject.Find("EventSystem").GetComponent<StartGame>().active_session_id = session_id;
-		db.InsertHistory("Game Starts", session_id);
+		
+		//this function is to insert history into table
+		hismsg = "Game Starts";
+		db.InsertHistory(hismsg, session_id);
+		HistPrint(hismsg);
 		//Debug.Log (session_id);
+
+		totplayeractive = db.BasicQuery ("SELECT COUNT(id) FROM tbl_players WHERE tbl_Sessions_id=" + session_id);
+		totplayeractive.Read ();
+		totnumplayeractive = totplayeractive.GetInt32 (0);
+        //Debug.Log("Main num: " + playernum.ToString());
+        disableandenabletab();
+
+
 		playernumber = db.BasicQuery ("SELECT id FROM tbl_players WHERE tbl_Sessions_id=" + session_id);
 		playernum = new ArrayList();
      	while(playernumber.Read ()){
@@ -52,6 +70,7 @@ public class MainEngine : MonoBehaviour {
 
 		PlayerOnClick (1);
 		GameObject.Find("BtnPlayer"+nextactive).GetComponent<Image>().color = Color.blue;
+		PlayerNameActive = GameObject.Find ("numPlayerName").GetComponent<Text>().text;
 	}
 
 	void OnApplicationQuit(){
@@ -59,18 +78,16 @@ public class MainEngine : MonoBehaviour {
 		Debug.Log ("Application Close");
 	}
 
-	//private functions
-	// Use this for initialization
 	public void btnRollDiceOnClick () 
 	{
 		InvokeRepeating("GetDiceValue", 0.0f, 0.1f);
-		int nextactive = int.Parse(active_number) + 1;
-		if (nextactive == 5)
-			nextactive = 1;
-		//Debug.Log ("BtnPlayer" + nextactive);
-		GameObject.Find ("BtnPlayer" + active_number).GetComponent<Image>().color = Color.black;
-		GameObject.Find("BtnPlayer"+nextactive).GetComponent<Image>().color = Color.blue;
-		active_number = nextactive.ToString();
+		
+
+		//activate next player
+		nextplayeractive();
+		PlayerOnClick(nextactive);
+
+		
 	}
 
 	public void btnInfoOnClick () 
@@ -108,10 +125,35 @@ public class MainEngine : MonoBehaviour {
 		else
 			GetDiceActive(registerdices[5]);
 		
-		if (number == 15) 
+		if (number == 3) 
 		{
+			
 			CancelInvoke ();
+			
+			int pan = int.Parse(tempcurrentactive);
 			number = 0;
+			diceNumberResult = diceNumber;
+
+			//hismsg = "Player "+  pan + "(" + PlayerNameActive + ")" + " Dice Result is "+ diceNumberResult ;
+			//db.InsertHistory(hismsg, session_id);
+			//HistPrint(hismsg);
+			//db.InsertHistory(, session_id);
+			
+			int nextplayerposition = playercurrentposition[pan-1] + diceNumberResult;
+			if (nextplayerposition > 31)
+			{
+				nextplayerposition -= 31; 
+			}
+
+
+			
+			hismsg = "Player "+  pan + "(" + PlayerNameActive + ")" + " Dice Result is "+ diceNumberResult +", Player "+  pan + "(" + PlayerNameActive + ")" + " walks from " + playercurrentposition[pan-1] + " to " + nextplayerposition;
+			db.InsertHistory(hismsg, session_id);
+			HistPrint(hismsg);
+
+			playercurrentposition[pan-1] = nextplayerposition;
+
+			
 		}
 	}
 
@@ -202,4 +244,49 @@ public class MainEngine : MonoBehaviour {
 			GameObject.Find(avatar).GetComponent<RawImage>().enabled = false;
 		}
 	}
+
+	//this function to control active tab depend on the active players
+	void disableandenabletab()
+
+	{
+		for(int i = 1; i <= 4; i++)
+		{
+			GameObject.Find("BtnPlayer"+i).GetComponent<Image>().enabled = false;
+		}
+
+		for(int j = 1; j <= totnumplayeractive ; j++)
+		{
+			GameObject.Find("BtnPlayer"+j).GetComponent<Image>().enabled = true;
+		}
+	}
+
+	void nextplayeractive()
+	{
+		tempcurrentactive = player_active_number;
+		PlayerNameActive = GameObject.Find ("numPlayerName").GetComponent<Text>().text;
+		
+		nextactive = int.Parse(player_active_number) + 1;
+		if (nextactive > totnumplayeractive)
+			nextactive = 1;
+		//Debug.Log ("BtnPlayer" + nextactive);
+		GameObject.Find ("BtnPlayer" + player_active_number).GetComponent<Image>().color = Color.black;
+		GameObject.Find("BtnPlayer"+nextactive).GetComponent<Image>().color = Color.blue;
+		player_active_number = nextactive.ToString();
+
+		
+		
+	}
+
+	//function to print history
+	void HistPrint(string msg)
+	{
+
+		GameObject.Find ("numHistory3").GetComponent<Text>().text = GameObject.Find ("numHistory2").GetComponent<Text>().text;
+		GameObject.Find ("numHistory2").GetComponent<Text>().text = GameObject.Find ("numHistory1").GetComponent<Text>().text;
+		GameObject.Find ("numHistory1").GetComponent<Text>().text = msg;
+	}
+
+
+
+
 }

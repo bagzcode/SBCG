@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{09B53FE4-6872-09A2-5944-09143630E380}</ProjectGuid>
+    <ProjectGuid>{D674D31F-34D0-41A9-64F5-078C2FBB5346}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,25 +60,25 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data">
- <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project Active/Social Media Combined Game/Assets/Plugins/Mono.Data.dll</HintPath>
+ <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project/Social Business/SBCG/Assets/Plugins/Mono.Data.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data.Sqlite">
- <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project Active/Social Media Combined Game/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project/Social Business/SBCG/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data.SqliteClient">
- <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project Active/Social Media Combined Game/Assets/Plugins/Mono.Data.SqliteClient.dll</HintPath>
+ <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project/Social Business/SBCG/Assets/Plugins/Mono.Data.SqliteClient.dll</HintPath>
  </Reference>
  <Reference Include="System.Configuration">
- <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project Active/Social Media Combined Game/Assets/Plugins/System.Configuration.dll</HintPath>
+ <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project/Social Business/SBCG/Assets/Plugins/System.Configuration.dll</HintPath>
  </Reference>
  <Reference Include="System.Data">
- <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project Active/Social Media Combined Game/Assets/Plugins/System.Data.dll</HintPath>
+ <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project/Social Business/SBCG/Assets/Plugins/System.Data.dll</HintPath>
  </Reference>
  <Reference Include="System.EnterpriseServices">
- <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project Active/Social Media Combined Game/Assets/Plugins/System.EnterpriseServices.dll</HintPath>
+ <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project/Social Business/SBCG/Assets/Plugins/System.EnterpriseServices.dll</HintPath>
  </Reference>
  <Reference Include="System.Security">
- <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project Active/Social Media Combined Game/Assets/Plugins/System.Security.dll</HintPath>
+ <HintPath>/Users/kerthyayana/Documents/OneDrive - Bina Nusantara University/Project/Social Business/SBCG/Assets/Plugins/System.Security.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
