@@ -51,7 +51,8 @@ public class MainEngine : MonoBehaviour {
 		//this function is to insert history into table
 		hismsg = "Game Starts";
 		db.InsertHistory(hismsg, session_id);
-		HistPrint(hismsg);
+		HistPrint("-");HistPrint("-"); 
+		HistPrint(hismsg); 
 		//Debug.Log (session_id);
 
 		totplayeractive = db.BasicQuery ("SELECT COUNT(id) FROM tbl_players WHERE tbl_Sessions_id=" + session_id);
@@ -71,6 +72,8 @@ public class MainEngine : MonoBehaviour {
 		PlayerOnClick (1);
 		GameObject.Find("BtnPlayer"+nextactive).GetComponent<Image>().color = Color.blue;
 		PlayerNameActive = GameObject.Find ("numPlayerName").GetComponent<Text>().text;
+
+
 	}
 
 	void OnApplicationQuit(){
@@ -133,24 +136,20 @@ public class MainEngine : MonoBehaviour {
 			int pan = int.Parse(tempcurrentactive);
 			number = 0;
 			diceNumberResult = diceNumber;
-
-			//hismsg = "Player "+  pan + "(" + PlayerNameActive + ")" + " Dice Result is "+ diceNumberResult ;
-			//db.InsertHistory(hismsg, session_id);
-			//HistPrint(hismsg);
-			//db.InsertHistory(, session_id);
 			
+			//handling rotation more than date 31
 			int nextplayerposition = playercurrentposition[pan-1] + diceNumberResult;
 			if (nextplayerposition > 31)
 			{
 				nextplayerposition -= 31; 
 			}
 
-
-			
+			//save the history to database and print it to interface
 			hismsg = "Player "+  pan + "(" + PlayerNameActive + ")" + " Dice Result is "+ diceNumberResult +", Player "+  pan + "(" + PlayerNameActive + ")" + " walks from " + playercurrentposition[pan-1] + " to " + nextplayerposition;
 			db.InsertHistory(hismsg, session_id);
 			HistPrint(hismsg);
 
+			//Update current position to array list
 			playercurrentposition[pan-1] = nextplayerposition;
 
 			
