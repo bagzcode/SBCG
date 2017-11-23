@@ -51,6 +51,7 @@
      <Compile Include="Assets\Script\MenuScreenEngine.cs" />
      <Compile Include="Assets\Script\NewGameEngine.cs" />
      <Compile Include="Assets\Script\StartGame.cs" />
+     <Compile Include="Assets\Script\Tab.cs" />
      <Compile Include="Assets\Script\dbAccess.cs" />
      <Compile Include="Assets\Script\value.cs" />
  <Reference Include="UnityEngine.UI">
