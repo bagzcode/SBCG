@@ -152,7 +152,7 @@ public class dbAccess : MonoBehaviour {
 	public ArrayList SingleSelectWhere(string tableName, string itemToSelect, string wCol, string wPar, string wValue){ // Selects a single Item
 		string query;
 		query = "SELECT " + itemToSelect + " FROM " + tableName + " WHERE " + wCol + wPar + wValue;	
-		Debug.Log (query);
+		//Debug.Log (query);
 		dbcmd = dbcon.CreateCommand();
 		dbcmd.CommandText = query;
 		reader = dbcmd.ExecuteReader();
@@ -218,6 +218,27 @@ public class dbAccess : MonoBehaviour {
 	public int InsertHistory(string desc, string session_id ){
 		string query;
 		query = "INSERT INTO tbl_Histories (Descriptions, tbl_Sessions_id) VALUES ('" + desc + "', " + session_id + ")" ;
+		//Debug.Log(query);
+		try
+		{
+
+			dbcmd = dbcon.CreateCommand();
+			dbcmd.CommandText = query;
+			reader = dbcmd.ExecuteReader();
+		}
+		catch(Exception e){
+			
+			Debug.Log(e);
+			return 0;
+		}
+		return 1;
+	}
+
+	//UPDATE 'tbl_Players' SET 'numMoney'=? WHERE '_rowid_'='490';
+	public int UpdateData (string tbl, string field, string vfield, string userid)
+	{
+		string query;
+		query = "UPDATE '"+tbl+"' SET '"+field+"'="+vfield+" WHERE '_rowid_'='"+userid+"'" ;
 		Debug.Log(query);
 		try
 		{
@@ -233,6 +254,8 @@ public class dbAccess : MonoBehaviour {
 		}
 		return 1;
 	}
+
+	
 
 
 
