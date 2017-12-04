@@ -48,8 +48,10 @@
      <Compile Include="Assets\Script\EngineInfo.cs" />
      <Compile Include="Assets\Script\EngineProblem.cs" />
      <Compile Include="Assets\Script\MainEngine.cs" />
+     <Compile Include="Assets\Script\Menu.cs" />
      <Compile Include="Assets\Script\MenuScreenEngine.cs" />
      <Compile Include="Assets\Script\NewGameEngine.cs" />
+     <Compile Include="Assets\Script\Setting.cs" />
      <Compile Include="Assets\Script\StartGame.cs" />
      <Compile Include="Assets\Script\Tab.cs" />
      <Compile Include="Assets\Script\dbAccess.cs" />

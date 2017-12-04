@@ -13,7 +13,8 @@ public class MainEngine : MonoBehaviour {
 	private string[] registerdices = {"diceone","dicetwo","dicethree","dicefour","dicefive","dicesix"};
 	private int diceNumber;
 	private int number = 0;
-	string active_number = "1", player_active_number = "1", tempcurrentactive;
+	string active_number = "1", player_active_number = "1";
+	public string tempcurrentactive;
 	int nextactive = 1;
 	private IDataReader playernumber, avatarnumber, totplayeractive; 
 	public ArrayList playernum, avatarnum; 
@@ -38,6 +39,7 @@ public class MainEngine : MonoBehaviour {
 
 		//Load required scenes for the games 
 		SceneManager.UnloadScene("New");
+		setassetscene();
 
 		//get values of active session and number of active players
 		activesessionid = GameObject.Find("EventSystem").GetComponent<StartGame>().active_session_id;
@@ -120,7 +122,7 @@ public class MainEngine : MonoBehaviour {
 		else
 			GetDiceActive(registerdices[5]);
 		
-		if (number == 3) 
+		if (number == 15) 
 		{
 			
 			CancelInvoke ();
@@ -192,6 +194,7 @@ public class MainEngine : MonoBehaviour {
 		selectednumber = number - 1;
 		ArrayList resultstart = db.SelectJoinTable ("tbl_Users.Name, tbl_Players.*", "tbl_Players INNER JOIN tbl_Users", "tbl_Users.id=tbl_Players.tbl_Users_id AND tbl_Players.tbl_Sessions_id=" + session_id + " AND tbl_Players.id=" + playernum[selectednumber]);
 		SetValueNum (resultstart);
+
 		disableAvatar ();
 		active_number = ((string[])resultstart [0]) [2];
 		string avatar = "Avatar" + active_number.ToString ();
@@ -262,6 +265,7 @@ public class MainEngine : MonoBehaviour {
 
 	void SetValueNum(ArrayList result)
 	{
+		Debug.Log(((string[])result[0])[6]+", "+((string[])result[0])[7]+", "+((string[])result[0])[8]+", "+((string[])result[0])[9]+", "+((string[])result[0])[10]);
 		GameObject.Find ("numPlayerName").GetComponent<Text>().text = ((string[])result[0])[0];
 		GameObject.Find ("numMoney").GetComponent<Text>().text = ((string[])result[0])[3];
 		GameObject.Find ("numLevel").GetComponent<Text>().text = ((string[])result[0])[4];
@@ -362,9 +366,10 @@ public class MainEngine : MonoBehaviour {
 	void setassetscene()
 	{
 		GameObject.Find("MainBoardgame").GetComponent<Canvas>().sortingOrder = 2;
-		GameObject.Find("PlayerAssetScreen").GetComponent<Canvas>().sortingOrder = 3;
 		GameObject.Find("Info").GetComponent<Canvas>().sortingOrder = 1;
 		GameObject.Find("Problem").GetComponent<Canvas>().sortingOrder = 0;
+		GameObject.Find("PlayerAssetScreen").GetComponent<Canvas>().sortingOrder = 3;
+		GameObject.Find("SettingPanel").GetComponent<Canvas>().sortingOrder = 4;
 	}
 
 	void checkinfoorproblem ()

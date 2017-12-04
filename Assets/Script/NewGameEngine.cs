@@ -20,6 +20,8 @@ public class NewGameEngine : MonoBehaviour
 	void Start ()
 	{
 		SceneManager.UnloadScene("Menu");
+		GameObject.Find("NewGameScreen").GetComponent<Canvas>().sortingOrder = 0;
+		GameObject.Find("SettingPanel").GetComponent<Canvas>().sortingOrder = 1;
 
 		numSelectors = 4;
 		player = new GameObject[numSelectors];

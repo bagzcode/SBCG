@@ -199,6 +199,13 @@ public class value : MonoBehaviour {
 		
 		if (status)msg.updatedataplayer(fielddb);
 
+		//get number player active
+		string activeplayer = GameObject.Find("EngineMain").GetComponent<MainEngine>().tempcurrentactive;
+		if (activeplayer == "1")GameObject.Find("EngineMain").GetComponent<MainEngine>().Player1onClick();
+		else if (activeplayer == "2")GameObject.Find("EngineMain").GetComponent<MainEngine>().Player2onClick();
+		else if (activeplayer == "3")GameObject.Find("EngineMain").GetComponent<MainEngine>().Player3onClick();
+		else if (activeplayer == "4")GameObject.Find("EngineMain").GetComponent<MainEngine>().Player4onClick();
+
 		GameObject.Find("TabCode").GetComponent<Tab>().Assetsgame();
 	}
 

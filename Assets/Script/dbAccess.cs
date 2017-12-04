@@ -195,7 +195,7 @@ public class dbAccess : MonoBehaviour {
 	public ArrayList SelectJoinTable(string itemToSelect, string tableName, string conditions){ // Selects a single Item last record
 		string query;
 		query = "SELECT " + itemToSelect + " FROM " + tableName + " ON " + conditions;
-		//Debug.Log (query);
+		Debug.Log (query);
 		dbcmd = dbcon.CreateCommand();
 		dbcmd.CommandText = query;
 		reader = dbcmd.ExecuteReader();
@@ -238,7 +238,7 @@ public class dbAccess : MonoBehaviour {
 	public int UpdateData (string tbl, string field, string vfield, string userid)
 	{
 		string query;
-		query = "UPDATE '"+tbl+"' SET '"+field+"'="+vfield+" WHERE '_rowid_'='"+userid+"'" ;
+		query = "UPDATE "+tbl+" SET "+field+"="+vfield+" WHERE id="+userid ;
 		Debug.Log(query);
 		try
 		{
